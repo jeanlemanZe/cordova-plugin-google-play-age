@@ -2,7 +2,7 @@
 Google Play Age Signals API
 https://developer.android.com/google/play/age-signals/use-age-signals-api
 
-### Response Codes
+## Response Codes
 > Values for userStatus
 
 #### VERIFIED	
@@ -38,3 +38,34 @@ https://developer.android.com/google/play/age-signals/use-age-signals-api
 #### installID	Play-generated alphanumeric ID.	
 > An ID assigned to supervised user installs by Google Play, used for the purposes of notifying you of revoked app approval. Review the documentation for revoked app approvals.
 > Empty (a blank value)	userStatus is verified, unknown, or empty.
+
+## Error Codes
+#### API_NOT_AVAILABLE : -1	
+> The Play Age Signals API is not available. The Play Store app version installed on the device might be old.
+
+#### PLAY_STORE_NOT_FOUND : -2	
+> No Play Store app is found on the device. Ask the user to install or enable the Play Store.
+
+#### NETWORK_ERROR : -3	
+> No available network is found. Ask the user to check for a connection.
+
+#### PLAY_SERVICES_NOT_FOUND : -4
+> Play Services is not available or its version is too old. Ask the user to install, update, or enable Play Services.
+
+#### CANNOT_BIND_TO_SERVICE : -5
+> Binding to the service in the Play Store has failed. This can be due to having an old Play Store version installed on the device or device memory is overloaded. Ask the user to update the Play Store app. Retry with an exponential backoff.
+
+#### PLAY_STORE_VERSION_OUTDATED : -6	
+> The Play Store app needs to be updated. Ask the user to update the Play Store app.
+
+#### PLAY_SERVICES_VERSION_OUTDATED : -7
+> Play Services needs to be updated. Ask the user to update Play Services.
+
+#### CLIENT_TRANSIENT_ERROR : -8	
+> 	There was a transient error in the client device. Implement a retry strategy with a maximum number of attempts as an exit condition. If the issue still doesn't resolve, ask the user to try again later.
+
+#### APP_NOT_OWNED : -9
+> The app was not installed by Google Play. Ask the user to get your app from Google Play.
+
+#### INTERNAL_ERROR : -100
+> Unknown internal error. Implement a retry strategy with a maximum number of attempts as an exit condition. If the issue still doesn't resolve, ask the user to try again later. If it fails consistently, contact Google Play Developer support, include Play Age Signals API in the subject, and include as much technical detail as possible (such as a bug report).
