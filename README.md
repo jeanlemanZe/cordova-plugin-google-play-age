@@ -9,7 +9,7 @@ https://developer.android.com/google/play/age-signals/use-age-signals-api
 > cordova plugin rm @globules-io/cordova-plugin-google-play-age
 
 ### Usage
-    cordova.plugins.agesignals.checkAgeSignals(
+    cordova.plugins.google.play.age.checkAgeSignals(
         function(result) {
             console.log('Age Status:', result.userStatus); // e.g., "VERIFIED"
             if (result.userStatus === 'SUPERVISED_APPROVAL_DENIED') {
