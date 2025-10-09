@@ -1,6 +1,12 @@
 # cordova-plugin-google-play-age
-Google Play Age Signals API
+Google Play Age Signals Cordova Plugin
 https://developer.android.com/google/play/age-signals/use-age-signals-api
+
+Add the plugin 
+> cordova plugin add @globules-io/cordova-plugin-google-play-age
+
+Remove the plugin 
+> cordova plugin rm @globules-io/cordova-plugin-google-play-age
 
 ## Response Codes
 > Values for userStatus
