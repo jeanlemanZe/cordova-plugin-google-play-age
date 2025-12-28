@@ -15,6 +15,7 @@ import com.google.android.play.agesignals.AgeSignalsManagerFactory;
 import com.google.android.play.agesignals.AgeSignalsRequest;
 import com.google.android.play.agesignals.AgeSignalsResult;
 import com.google.android.play.agesignals.AgeSignalsException;
+import com.google.android.play.agesignals.AgeSignalsVerificationStatus;
 
 public class AgeSignalsPlugin extends CordovaPlugin {
 
