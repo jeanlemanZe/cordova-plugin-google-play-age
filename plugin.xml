@@ -20,6 +20,6 @@
           </config-file>
      </platform>
      <js-module src="www/AgeSignals.js" name="AgeSignals">
-          <clobbers target="cordova.plugins.google.play.age" />
+          <clobbers target="AgeSignalsPlugin" />
      </js-module>
 </plugin>
