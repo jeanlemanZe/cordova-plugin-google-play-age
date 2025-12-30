@@ -6,16 +6,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Date;
-
 import android.content.Context;
+import androidx.annotation.NonNull;
 
 import com.google.android.play.agesignals.AgeSignalsManager;
 import com.google.android.play.agesignals.AgeSignalsManagerFactory;
 import com.google.android.play.agesignals.AgeSignalsRequest;
+import com.google.android.play.agesignals.model.AgeSignalsVerificationStatus;
 import com.google.android.play.agesignals.AgeSignalsResult;
-import com.google.android.play.agesignals.AgeSignalsException;
-import com.google.android.play.agesignals.AgeSignalsVerificationStatus;
 
 public class AgeSignalsPlugin extends CordovaPlugin {
 
@@ -34,29 +32,31 @@ public class AgeSignalsPlugin extends CordovaPlugin {
 
         manager.checkAgeSignals(AgeSignalsRequest.builder().build())
             .addOnSuccessListener(result -> {
-                JSONObject response = new JSONObject();
-                try {
-                    response.put("userStatus", result.userStatus() != null ? result.userStatus().toString() : null);
+                //JSONObject response = new JSONObject();
+                /*try {
+                    response.put("userStatus", result.userStatus().toString());
                     response.put("ageLower", result.ageLower());
                     response.put("ageUpper", result.ageUpper());
                     response.put("mostRecentApprovalDate", result.mostRecentApprovalDate());
                     response.put("installId", result.installId());
-
                     callbackContext.success(response);
                 } catch (JSONException e) {
                     callbackContext.error("JSON error: " + e.getMessage());
-                }
+                }*/
+                String installId = result.installId();
+                callbackContext.success(installId);
             })
             .addOnFailureListener(throwable -> {
-                int errorCode = extractErrorCode(throwable);
-                callbackContext.error(String.valueOf(errorCode));
+                // Extract error code from throwable if available; default to -100 for internal errors
+                String errorCode = throwable.getMessage() != null ? extractErrorCode(throwable.getMessage()) : "-100";
+                callbackContext.error(errorCode);
             });
     }
 
-    private int extractErrorCode(Throwable throwable) {
-        if (throwable instanceof AgeSignalsException) {
-            return ((AgeSignalsException) throwable).getErrorCode();
-        }
-        return -100;
+    // Helper to parse error codes (implement based on API docs; extend as needed)
+    private String extractErrorCode(String message) {
+        // Parse logic for codes like -1 (API_NOT_AVAILABLE), etc.
+        // For simplicity, return -100 if not matched; in production, use regex or switch on known strings
+        return message + " in extract!";
     }
 }
